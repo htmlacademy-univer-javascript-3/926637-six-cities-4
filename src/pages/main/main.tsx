@@ -111,8 +111,8 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {[...Array(5).keys()].map((index) => (
-                  <PlaceCard key={index}/>
+                {offers.map((offer) => (
+                  <PlaceCard offer={offer}/>
                 ))}
               </div>
             </section>

@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import PlaceCard from '../../components/place-card/place-card';
+import OfferCard from '../../components/offer-card/offer-card';
 import { Offer } from '../../mocks/offers';
 
 type MainPageProps = {
@@ -112,7 +112,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer) => (
-                  <PlaceCard offer={offer}/>
+                  <OfferCard offer={offer}/>
                 ))}
               </div>
             </section>

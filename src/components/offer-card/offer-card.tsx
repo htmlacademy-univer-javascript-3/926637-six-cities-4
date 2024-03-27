@@ -1,10 +1,10 @@
 import { Offer } from "../../mocks/offers";
 
-type PlaceCardProps = {
+type OfferCardProps = {
   offer: Offer
 }
 
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function OfferCard({offer}: OfferCardProps): JSX.Element {
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
@@ -46,4 +46,4 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default OfferCard;

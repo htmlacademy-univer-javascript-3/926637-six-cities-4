@@ -44,7 +44,7 @@ export const offers: Offer[] = [
     "isFavorite": true,
     "isPremium": true,
     "rating": 5,
-    "previewImage": "https://www.advantour.com/img/russia/images/murmansk.jpg"
+    "previewImage": "img/apartment-02.jpg"
   },
   {
     "id": "6af6f711-c28d-4121-82cd-e0b462a27f01",
@@ -67,7 +67,7 @@ export const offers: Offer[] = [
     "isFavorite": false,
     "isPremium": false,
     "rating": 2,
-    "previewImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F_%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%D0%B0_%D1%81_%D0%BE%D1%82%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC_%282021%29.jpg/1200px-%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F_%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%D0%B0_%D1%81_%D0%BE%D1%82%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC_%282021%29.jpg"
+    "previewImage": "img/apartment-03.jpg"
   },
   {
     "id": "6af6f711-c28d-4121-82cd-e0b462a27f02",
@@ -90,7 +90,7 @@ export const offers: Offer[] = [
     "isFavorite": true,
     "isPremium": false,
     "rating": 4,
-    "previewImage": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Samara_P5171857_2200.jpg/1200px-Samara_P5171857_2200.jpg"
+    "previewImage": "img/apartment-01.jpg"
   },
   {
     "id": "6af6f711-c28d-4121-82cd-e0b462a27f03",
@@ -113,6 +113,6 @@ export const offers: Offer[] = [
     "isFavorite": false,
     "isPremium": true,
     "rating": 3,
-    "previewImage": "https://www.planete-energies.com/sites/default/files/styles/1200x630/public/migrated_files/images/thumbnails/image/moscow.jpg?itok=lPt9jNWR"
+    "previewImage": "img/apartment-03.jpg"
   },
 ];

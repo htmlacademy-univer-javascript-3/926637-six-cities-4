@@ -1,11 +1,13 @@
 import Logo from '../../components/logo/logo';
-import PlaceCard from '../../components/place-card/place-card';
+import { Offer } from '../../types/offer';
+import OffersList from '../../components/offers-list/offers-list';
+import { OfferCardType } from '../../const';
 
 type MainPageProps = {
-  offersCount: number;
+  offers: Offer[];
 };
 
-function MainPage({ offersCount }: MainPageProps): JSX.Element {
+function MainPage({ offers }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -81,7 +83,7 @@ function MainPage({ offersCount }: MainPageProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offersCount} places to stay in Amsterdam
+                {offers.length} places to stay in Amsterdam
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -109,11 +111,7 @@ function MainPage({ offersCount }: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {[...Array(5).keys()].map((index) => (
-                  <PlaceCard key={index}/>
-                ))}
-              </div>
+              <OffersList offers={offers} offerCardType={OfferCardType.Main}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

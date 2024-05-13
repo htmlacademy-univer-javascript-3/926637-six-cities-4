@@ -1,5 +1,3 @@
-export const offersCount = 5;
-
 export enum AppRoute {
 	Main = '/',
 	Login = '/login',
@@ -12,3 +10,10 @@ export enum AuthStatus {
 	NoAuth = 'NO_AUTH',
 	Unknown = 'Unknown'
 }
+
+export enum OfferCardType {
+	Main = 'MAIN',
+	Favorite = 'FAVORITE'
+}
+
+export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

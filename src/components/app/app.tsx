@@ -6,19 +6,22 @@ import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import NotFoundPage from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
+import { Offer } from '../../types/offer';
+import {Comment} from '../../types/comment';
 
 type AppProps = {
-	offersCount: number;
+	offers: Offer[];
+  comments: Comment[];
 };
 
 
-function App ({offersCount}: AppProps): JSX.Element {
+function App ({offers, comments}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offersCount={offersCount} />}
+          element={<MainPage offers={offers} />}
         />
         <Route
           path={AppRoute.Login}
@@ -27,14 +30,14 @@ function App ({offersCount}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authStatus={AuthStatus.NoAuth}>
-              <FavoritesPage/>
+            <PrivateRoute authStatus={AuthStatus.Auth}>
+              <FavoritesPage offers={offers}/>
             </PrivateRoute>
           }
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage/>}
+          element={<OfferPage comments={comments}/>}
         />
         <Route
           path="*"

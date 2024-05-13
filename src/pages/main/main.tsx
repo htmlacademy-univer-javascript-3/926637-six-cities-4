@@ -1,6 +1,7 @@
 import Logo from '../../components/logo/logo';
-import OfferCard from '../../components/offer-card/offer-card';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
+import OffersList from '../../components/offers-list/offers-list';
+import { OfferCardType } from '../../const';
 
 type MainPageProps = {
   offers: Offer[];
@@ -110,11 +111,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <OfferCard offer={offer}/>
-                ))}
-              </div>
+              <OffersList offers={offers} offerCardType={OfferCardType.Main}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map" />

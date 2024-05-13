@@ -1,46 +1,82 @@
-import { Offer } from "../../mocks/offers";
+import { Link } from 'react-router-dom';
+import { OfferCardType } from '../../const';
+import { Offer } from '../../types/offer';
 
 type OfferCardProps = {
-  offer: Offer
+  offer: Offer;
+  offerCardType: OfferCardType;
+  onMouseOver: () => void;
 }
 
-function OfferCard({offer}: OfferCardProps): JSX.Element {
+function OfferCard({offer, offerCardType, onMouseOver = (() => 0)}: OfferCardProps): JSX.Element {
+  let articleClassName: string = '';
+  let imgWrapperClassName: string = '';
+  let imgWidth: number = 0;
+  let imgHeight: number = 0;
+  let bookmarkButtonText: string = '';
+  const bookmarkButtonClassName = `place-card__bookmark-button${offer.isFavorite ? '--active' : ''} button`;
+  const offerUrl = `/offer/${offer.id}`;
+  switch (offerCardType){
+    case OfferCardType.Main:
+      articleClassName = 'cities__card place-card';
+      imgWrapperClassName = 'cities__image-wrapper place-card__image-wrapper';
+      imgWidth = 260;
+      imgHeight = 200;
+      bookmarkButtonText = 'To bookmarks';
+      break;
+    case OfferCardType.Favorite:
+      articleClassName = 'favorites__card place-card';
+      imgWrapperClassName = 'favorites__image-wrapper place-card__image-wrapper';
+      imgWidth = 150;
+      imgHeight = 110;
+      bookmarkButtonText = 'In bookmarks';
+      break;
+    default:
+      break;
+  }
   return (
-    <article className="cities__card place-card">
-      <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img
-            className="place-card__image"
-            src={offer.previewImage}
-            width={260}
-            height={200}
-            alt="Place image"
-          />
-        </a>
-      </div>
-      <div className="place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">€{offer.price}</b>
-            <span className="place-card__price-text">/&nbsp;night</span>
+    <article className={articleClassName} onMouseOver={onMouseOver}>
+      {
+        offer.isPremium ? (
+          <div className='place-card__mark'>
+            <span>Premium</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
-            <svg className="place-card__bookmark-icon" width={18} height={19}>
-              <use xlinkHref="#icon-bookmark" />
+        ) : ''
+      }
+      <div className={imgWrapperClassName}>
+        <Link to={offerUrl}>
+          <img
+            className='place-card__image'
+            src={offer.previewImage}
+            width={imgWidth}
+            height={imgHeight}
+            alt='Place image'
+          />
+        </Link>
+      </div>
+      <div className='place-card__info'>
+        <div className='place-card__price-wrapper'>
+          <div className='place-card__price'>
+            <b className='place-card__price-value'>€{offer.price}</b>
+            <span className='place-card__price-text'>/&nbsp;night</span>
+          </div>
+          <button className={bookmarkButtonClassName} type='button'>
+            <svg className='place-card__bookmark-icon' width={18} height={19}>
+              <use xlinkHref='#icon-bookmark' />
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className='visually-hidden'>{bookmarkButtonText}</span>
           </button>
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
+        <div className='place-card__rating rating'>
+          <div className='place-card__stars rating__stars'>
             <span style={{ width: `${20 * offer.rating}%` }} />
-            <span className="visually-hidden">Rating</span>
+            <span className='visually-hidden'>Rating</span>
           </div>
         </div>
-        <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+        <h2 className='place-card__name'>
+          <Link to={offerUrl}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className='place-card__type'>{offer.type}</p>
       </div>
     </article>
   );

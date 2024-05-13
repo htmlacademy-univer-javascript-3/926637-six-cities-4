@@ -10,3 +10,8 @@ export enum AuthStatus {
 	NoAuth = 'NO_AUTH',
 	Unknown = 'Unknown'
 }
+
+export enum OfferCardType {
+	Main = 'MAIN',
+	Favorite = 'FAVORITE'
+}

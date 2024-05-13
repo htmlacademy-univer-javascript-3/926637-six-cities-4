@@ -11,6 +11,9 @@ type OffersListProps = {
 function OffersList({ offers, offerCardType }: OffersListProps) {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
   const favoritesCitiesNames = [...new Set(offers.map((offer) => offer.city.name))];
+  if (activeOffer === null){
+    offers = [...offers];
+  }
   // setActiveOffer(activeOffer);
   switch (offerCardType){
     case OfferCardType.Main:

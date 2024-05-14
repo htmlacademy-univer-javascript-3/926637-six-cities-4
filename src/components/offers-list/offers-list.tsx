@@ -5,7 +5,7 @@ import {OfferCardType} from '../../const';
 type OffersListProps = {
   offers: Offer[];
   offerCardType: OfferCardType;
-  setActiveOffer: (offer: Offer | null) => void
+  setActiveOffer: (offer: Offer | null) => void;
 };
 
 function OffersList({ offers, offerCardType, setActiveOffer }: OffersListProps) {

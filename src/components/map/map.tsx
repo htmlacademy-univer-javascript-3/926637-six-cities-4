@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
-import { CityToCenterLocationMap, CityToOffer } from "../../const";
-import { Offer } from "../../types/offer";
-import useMap from "../../hooks/useMap";
+import { useEffect, useRef } from 'react';
+import { CityToCenterLocationMap, CityToOffer } from '../../const';
+import { Offer } from '../../types/offer';
+import useMap from '../../hooks/useMap';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,22 +11,22 @@ type MapProps = {
   activeOffer: Offer | null;
 };
 
+const defaultCustomIcon = new Icon({
+  iconUrl: '/img/pin.svg',
+  iconSize: [27, 40],
+  iconAnchor: [14, 40]
+});
+
+const currentCustomIcon = new Icon({
+  iconUrl: '/img/pin-active.svg',
+  iconSize: [27, 40],
+  iconAnchor: [14, 40]
+});
+
 function Map({ city, offers, activeOffer }: MapProps): JSX.Element {
   const cityCenterLocation = CityToCenterLocationMap[city];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCenterLocation);
-
-  const defaultCustomIcon = new Icon({
-    iconUrl: '/img/pin.svg',
-    iconSize: [27, 40],
-    iconAnchor: [14, 40]
-  });
-
-  const currentCustomIcon = new Icon({
-    iconUrl: '/img/pin-active.svg',
-    iconSize: [27, 40],
-    iconAnchor: [14, 40]
-  });
 
   useEffect(() => {
     if (map) {
@@ -54,7 +54,7 @@ function Map({ city, offers, activeOffer }: MapProps): JSX.Element {
     }
   }, [map, offers, activeOffer]);
 
-	return (<section className="cities__map map" ref={mapRef}/>);
+  return (<section className='cities__map map' ref={mapRef}/>);
 }
 
 export default Map;

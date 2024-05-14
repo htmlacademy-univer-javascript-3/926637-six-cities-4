@@ -9,8 +9,8 @@ type OfferCardProps = {
   onMouseLeave: () => void;
 }
 
-function OfferCard({offer, offerCardType, 
-      onMouseOver = (() => 0), onMouseLeave = (() => 0)}: OfferCardProps): JSX.Element {
+function OfferCard({offer, offerCardType,
+  onMouseOver = (() => 0), onMouseLeave = (() => 0)}: OfferCardProps): JSX.Element {
   let articleClassName: string = '';
   let imgWrapperClassName: string = '';
   let imgWidth: number = 0;

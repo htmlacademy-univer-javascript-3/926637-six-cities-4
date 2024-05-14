@@ -117,7 +117,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
             </section>
             <div className="cities__right-section">
-              <Map city={CityToOffer.Amsterdam} offers={offers} activeOffer={activeOffer}/>
+              <Map city={CityToOffer.Amsterdam} offers={offers} activeOffer={activeOffer} type="cities"/>
             </div>
           </div>
         </div>

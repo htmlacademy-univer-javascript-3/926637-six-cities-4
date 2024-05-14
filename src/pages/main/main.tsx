@@ -1,13 +1,16 @@
 import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 import OffersList from '../../components/offers-list/offers-list';
-import { OfferCardType } from '../../const';
+import { CityToOffer, OfferCardType } from '../../const';
+import React from 'react';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   offers: Offer[];
 };
 
 function MainPage({ offers }: MainPageProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,10 +114,10 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <OffersList offers={offers} offerCardType={OfferCardType.Main}/>
+              <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map city={CityToOffer.Amsterdam} offers={offers} activeOffer={activeOffer}/>
             </div>
           </div>
         </div>

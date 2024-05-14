@@ -39,6 +39,14 @@ function OffersList({ offers, offerCardType, setActiveOffer }: OffersListProps) 
           )}
         </ul>
       );
+    case OfferCardType.Offer:
+      return (
+        <div className='near-places__list places__list'>
+          {offers.map((offer) => (
+            <OfferCard offer={offer} offerCardType={offerCardType} key={offer.id} onMouseOver={() => setActiveOffer(offer)} onMouseLeave={() => setActiveOffer(null)}/>
+          ))}
+        </div>
+      );
     default:
       return null;
   }

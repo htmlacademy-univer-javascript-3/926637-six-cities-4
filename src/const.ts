@@ -16,4 +16,13 @@ export enum OfferCardType {
 	Favorite = 'FAVORITE'
 }
 
+export enum CityToOffer {
+	Paris = 'Paris',
+	Cologne = 'Cologne', 
+	Brussels = 'Brussels',
+	Amsterdam = 'Amsterdam', 
+	Hamburg = 'Hamburg', 
+	Dusseldorf = 'Dusseldorf'
+};
+
 export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

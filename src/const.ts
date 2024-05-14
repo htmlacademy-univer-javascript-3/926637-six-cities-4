@@ -18,11 +18,11 @@ export enum OfferCardType {
 
 export enum CityToOffer {
 	Paris = 'Paris',
-	Cologne = 'Cologne', 
+	Cologne = 'Cologne',
 	Brussels = 'Brussels',
-	Amsterdam = 'Amsterdam', 
-	Hamburg = 'Hamburg', 
+	Amsterdam = 'Amsterdam',
+	Hamburg = 'Hamburg',
 	Dusseldorf = 'Dusseldorf'
-};
+}
 
 export const cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

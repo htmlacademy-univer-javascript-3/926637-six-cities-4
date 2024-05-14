@@ -110,8 +110,8 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 68.9733,
-      'longitude': 33.0856,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 1
     },
     'isFavorite': true,
@@ -133,9 +133,9 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 55.1644,
-      'longitude': 61.4368,
-      'zoom': 2
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 1
     },
     'isFavorite': false,
     'isPremium': false,
@@ -156,9 +156,9 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 53.2038,
-      'longitude': 50.1606,
-      'zoom': 4
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 1
     },
     'isFavorite': true,
     'isPremium': false,
@@ -179,9 +179,9 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 55.7558,
-      'longitude': 37.6173,
-      'zoom': 8
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 1
     },
     'isFavorite': false,
     'isPremium': true,

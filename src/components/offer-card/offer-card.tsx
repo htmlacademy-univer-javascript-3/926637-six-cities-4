@@ -33,6 +33,13 @@ function OfferCard({offer, offerCardType,
       imgHeight = 110;
       bookmarkButtonText = 'In bookmarks';
       break;
+    case OfferCardType.Offer:
+      articleClassName = 'near-places__card place-card';
+      imgWrapperClassName = 'near-places__image-wrapper place-card__image-wrapper';
+      imgWidth = 260;
+      imgHeight = 200;
+      bookmarkButtonText = 'In bookmarks';
+      break;
     default:
       break;
   }

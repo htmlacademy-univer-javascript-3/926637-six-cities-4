@@ -6,9 +6,11 @@ type OfferCardProps = {
   offer: Offer;
   offerCardType: OfferCardType;
   onMouseOver: () => void;
+  onMouseLeave: () => void;
 }
 
-function OfferCard({offer, offerCardType, onMouseOver = (() => 0)}: OfferCardProps): JSX.Element {
+function OfferCard({offer, offerCardType,
+  onMouseOver = (() => 0), onMouseLeave = (() => 0)}: OfferCardProps): JSX.Element {
   let articleClassName: string = '';
   let imgWrapperClassName: string = '';
   let imgWidth: number = 0;
@@ -35,7 +37,7 @@ function OfferCard({offer, offerCardType, onMouseOver = (() => 0)}: OfferCardPro
       break;
   }
   return (
-    <article className={articleClassName} onMouseOver={onMouseOver}>
+    <article className={articleClassName} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
       {
         offer.isPremium ? (
           <div className='place-card__mark'>

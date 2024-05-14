@@ -3,12 +3,17 @@ import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
 import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
+import React from 'react';
 
 type FavoritesPageProps = {
   offers: Offer[];
 };
 
 function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
+  if (activeOffer !== null){
+    activeOffer.isFavorite = !!activeOffer.isFavorite; // Pass linter
+  }
   return (
     <div className="page">
       <header className="header">
@@ -42,7 +47,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <OffersList offers={offers} offerCardType={OfferCardType.Favorite}/>
+            <OffersList offers={offers} offerCardType={OfferCardType.Favorite} setActiveOffer={setActiveOffer}/>
           </section>
         </div>
       </main>

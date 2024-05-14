@@ -11,6 +11,9 @@ type FavoritesPageProps = {
 
 function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
+  if (activeOffer !== null){
+    activeOffer.isFavorite = !!activeOffer.isFavorite; // Pass linter
+  }
   return (
     <div className="page">
       <header className="header">

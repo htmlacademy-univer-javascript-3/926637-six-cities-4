@@ -15,7 +15,8 @@ export enum AuthStatus {
 
 export enum OfferCardType {
   Main = 'MAIN',
-  Favorite = 'FAVORITE'
+  Favorite = 'FAVORITE',
+  Offer = 'OFFER'
 }
 
 export enum CityToOffer {

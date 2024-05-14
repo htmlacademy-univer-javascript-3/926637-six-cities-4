@@ -31,7 +31,7 @@ export const CityToCenterLocationMap: Record<CityToOffer, Location> = {
 	[CityToOffer.Amsterdam]: {
 		'latitude': 52.37403000,
 		'longitude': 4.88969000,
-		'zoom': 1
+		'zoom': 11
 	},
 	[CityToOffer.Cologne]: {
 		'latitude': 52.37403000,

@@ -8,16 +8,17 @@ import NotFoundPage from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types/offer';
 import {Comment} from '../../types/comment';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
 	offers: Offer[];
   comments: Comment[];
 };
 
-
 function App ({offers, comments}: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -44,7 +45,7 @@ function App ({offers, comments}: AppProps): JSX.Element {
           element={<NotFoundPage/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

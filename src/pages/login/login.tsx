@@ -2,7 +2,6 @@ import { FormEvent, useRef } from 'react';
 import Logo from '../../components/logo/logo';
 import { loginAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
 import { AppRoute, AuthStatus } from '../../const';
 import { redirectToRoute } from '../../store/action';
 
@@ -13,7 +12,7 @@ function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const authStatus = useAppSelector((state) => state.authStatus);
-  
+
   if (authStatus == AuthStatus.Auth){
     dispatch(redirectToRoute(AppRoute.Main));
   }

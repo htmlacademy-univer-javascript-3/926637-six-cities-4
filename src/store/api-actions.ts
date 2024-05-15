@@ -45,15 +45,15 @@ export const checkAuthorization = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'checkAuthorization',
-  async (_arg, {dispatch, getState}) => {
+  (_arg, {dispatch, getState}) => {
     const state = getState();
-    if (state.authStatus != AuthStatus.Auth){
+    if (state.authStatus !== AuthStatus.Auth){
       dispatch(redirectToRoute(AppRoute.Login));
     }
   },
 );
 
-export const setFavoriteOffer = createAsyncThunk<void, {offerId: string, isFavorite: boolean}, {
+export const setFavoriteOffer = createAsyncThunk<void, {offerId: string; isFavorite: boolean}, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -61,8 +61,7 @@ export const setFavoriteOffer = createAsyncThunk<void, {offerId: string, isFavor
   'setFavoriteOffer',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(checkAuthorization());
-    const url = `${APIRoute.Favorites}/${_arg.offerId}/${(_arg.isFavorite) ? "1" : "0"}`;
-    console.log(_arg.offerId, url);
+    const url = `${APIRoute.Favorites}/${_arg.offerId}/${(_arg.isFavorite) ? '1' : '0'}`;
     await api.post<OfferDetailed>(url);
     dispatch(fetchOffers());
     dispatch(fetchFavoriteOffers());
@@ -76,7 +75,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 }>(
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
-    console.log(email, password);
     const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(requireAuthorization(AuthStatus.Auth));

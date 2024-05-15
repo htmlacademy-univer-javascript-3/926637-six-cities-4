@@ -22,7 +22,7 @@ export type OfferDetailed = Offer & {
     name: string;
     avatarUrl: string;
     isPro: boolean;
-  }
+  };
   images: [string];
   maxAdults: number;
 };

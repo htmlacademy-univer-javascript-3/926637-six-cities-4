@@ -13,14 +13,13 @@ function LoginPage(): JSX.Element {
 
   const authStatus = useAppSelector((state) => state.authStatus);
 
-  if (authStatus == AuthStatus.Auth){
+  if (authStatus === AuthStatus.Auth){
     dispatch(redirectToRoute(AppRoute.Main));
   }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    console.log(loginRef, passwordRef);
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
@@ -28,7 +27,7 @@ function LoginPage(): JSX.Element {
       }));
     }
   };
-  
+
   return (
     <div className="page page--gray page--login">
       <header className="header">

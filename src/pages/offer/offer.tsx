@@ -1,10 +1,9 @@
-import Logo from '../../components/logo/logo';
 import { ReviewForm } from '../../components/review-form/review-form';
 import ReviewList from '../../components/review-list/review-list';
 import { Comment } from '../../types/comment';
 import { offers } from '../../mocks/offers';
 import OffersList from '../../components/offers-list/offers-list';
-import { CityToOffer, OfferCardType } from '../../const';
+import { OfferCardType } from '../../const';
 import React from 'react';
 import { Offer } from '../../types/offer';
 import Map from '../../components/map/map';

@@ -1,5 +1,5 @@
 import MainPage from '../../pages/main/main';
-import {AppRoute, AuthStatus} from '../../const';
+import {AppRoute} from '../../const';
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from '../../pages/login/login';
 import FavoritesPage from '../../pages/favorites/favorites';

@@ -9,8 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import OffersSortingForm from '../../components/offers-sorting-form/offers-sorting-form';
 import { fetchOffers } from '../../store/api-actions';
 import Loading from '../../components/loading/loading';
-import { setIsDoneFetchingOffers } from '../../store/action';
-
 
 function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);

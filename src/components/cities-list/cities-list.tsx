@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { CityToOffer } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import CityTab from '../city-tab/city-tab';
-import { getOffers } from '../../store/action';
+import { fetchOffers } from '../../store/action';
 
 export function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.city);
-  const getOffersOnSetCity = () => dispatch(getOffers());
+  const getOffersOnSetCity = () => dispatch(fetchOffers());
 
   useEffect(() => {
     getOffersOnSetCity();

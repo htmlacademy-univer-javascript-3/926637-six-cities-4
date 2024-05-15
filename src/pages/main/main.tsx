@@ -61,13 +61,14 @@ function MainPage(): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               {
-                isDoneFetchingOffers ? <>
-                  <b className="places__found">
-                    {offers.length} places to stay in {city.toString()}
-                  </b>
-                  <OffersSortingForm/>
-                  <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
-                </> : <Loading/>
+                isDoneFetchingOffers ?
+                  <>
+                    <b className="places__found">
+                      {offers.length} places to stay in {city.toString()}
+                    </b>
+                    <OffersSortingForm/>
+                    <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
+                  </> : <Loading/>
               }
             </section>
             <div className="cities__right-section">

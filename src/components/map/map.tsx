@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CityToCenterLocationMap, CityToOffer } from '../../const';
+import { CityToCenterLocationMap } from '../../const';
 import { Offer } from '../../types/offer';
 import useMap from '../../hooks/useMap';
 import {Icon, layerGroup, Marker} from 'leaflet';
@@ -7,7 +7,6 @@ import 'leaflet/dist/leaflet.css';
 import { useAppSelector } from '../../hooks';
 
 type MapProps = {
-  city: CityToOffer;
   offers: Offer[];
   activeOffer: Offer | null;
   type: string;
@@ -25,7 +24,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 40]
 });
 
-function Map({ offers: offers, activeOffer, type }: MapProps): JSX.Element {
+function Map({ offers, activeOffer, type }: MapProps): JSX.Element {
   const city = useAppSelector((state) => state.city);
   const mapRef = useRef(null);
   const map = useMap(mapRef, CityToCenterLocationMap[city]);

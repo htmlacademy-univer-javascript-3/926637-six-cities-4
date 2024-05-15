@@ -11,7 +11,7 @@ type FavoritesPageProps = {
 
 function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
-  if (activeOffer !== null && activeOffer.id == '-1'){
+  if (activeOffer !== null && activeOffer.id === '-1'){
     activeOffer.isFavorite = !!activeOffer.isFavorite; // Pass linter
   }
   return (

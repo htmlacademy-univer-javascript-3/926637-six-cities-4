@@ -12,12 +12,12 @@ export const fetchOffers = createAsyncThunk<void, undefined, {
 }>(
   'fetchOffers',
   async (_arg, {dispatch, getState, extra: api}) => {
-	dispatch(setIsDoneFetchingOffers(false));
+    dispatch(setIsDoneFetchingOffers(false));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
-	const state = getState();
-	const fetchedOffers = data.filter((offer) => offer.city.name === state.city.toString());
+    const state = getState();
+    const fetchedOffers = data.filter((offer) => offer.city.name === state.city.toString());
     dispatch(setCurrentOffers(fetchedOffers));
-	dispatch(setFetchedOffers(fetchedOffers));
-	dispatch(setIsDoneFetchingOffers(true));
+    dispatch(setFetchedOffers(fetchedOffers));
+    dispatch(setIsDoneFetchingOffers(true));
   },
 );

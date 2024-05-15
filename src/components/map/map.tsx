@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { CityToCenterLocationMap, CityToOffer } from '../../const';
+import { CityToCenterLocationMap } from '../../const';
 import { Offer } from '../../types/offer';
 import useMap from '../../hooks/useMap';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useAppSelector } from '../../hooks';
 
 type MapProps = {
-  city: CityToOffer;
   offers: Offer[];
   activeOffer: Offer | null;
   type: string;
@@ -24,16 +24,17 @@ const currentCustomIcon = new Icon({
   iconAnchor: [14, 40]
 });
 
-function Map({ city, offers, activeOffer, type }: MapProps): JSX.Element {
-  const cityCenterLocation = CityToCenterLocationMap[city];
+function Map({ offers, activeOffer, type }: MapProps): JSX.Element {
+  const city = useAppSelector((state) => state.city);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cityCenterLocation);
+  const map = useMap(mapRef, CityToCenterLocationMap[city]);
 
   useEffect(() => {
     if (map) {
+      const cityCenterLocation = CityToCenterLocationMap[city];
       map.setView([cityCenterLocation.latitude, cityCenterLocation.longitude], cityCenterLocation.zoom);
     }
-  }, [map, cityCenterLocation]);
+  }, [map, city]);
 
   useEffect(() => {
     if (map) {
@@ -53,7 +54,7 @@ function Map({ city, offers, activeOffer, type }: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeOffer]);
+  }, [map, offers, activeOffer, city]);
 
   return (<section className={`${type}__map map`} ref={mapRef}/>);
 }

@@ -1,6 +1,6 @@
 import MainPage from '../../pages/main/main';
 import {AppRoute, AuthStatus} from '../../const';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import LoginPage from '../../pages/login/login';
 import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
@@ -8,16 +8,17 @@ import NotFoundPage from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types/offer';
 import {Comment} from '../../types/comment';
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browser-history';
 
 type AppProps = {
 	offers: Offer[];
   comments: Comment[];
 };
 
-
 function App ({offers, comments}: AppProps): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -44,7 +45,7 @@ function App ({offers, comments}: AppProps): JSX.Element {
           element={<NotFoundPage/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

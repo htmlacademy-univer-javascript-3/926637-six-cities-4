@@ -1,21 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CityToOffer, OffersSortingType } from '../const';
-import { offers } from '../mocks/offers';
 import { Offer } from '../types/offer';
-import { setCityToOffer, fetchOffers, setOffers, setOffersSortingType } from './action';
+import { setCityToOffer, setIsDoneFetchingOffers, setCurrentOffers, setOffersSortingType, setFetchedOffers } from './action';
 
 type StateType = {
   currentOffers: Offer[];
   lastFetchedOffers: Offer[];
   city: CityToOffer;
   offersSortingType: OffersSortingType;
+  isDoneFetchingOffers: boolean;
 }
 
 const initialState: StateType = {
-  currentOffers: offers,
-  lastFetchedOffers: offers,
+  currentOffers: [],
+  lastFetchedOffers: [],
   city: CityToOffer.Paris,
-  offersSortingType: OffersSortingType.PopularityDescending
+  offersSortingType: OffersSortingType.PopularityDescending,
+  isDoneFetchingOffers: false
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -23,15 +24,17 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCityToOffer, (state: StateType, action: { payload: CityToOffer }) => {
       state.city = action.payload;
     })
-    .addCase(fetchOffers, (state: StateType) => {
-      state.currentOffers = offers.filter((offer: Offer) => offer.city.name === state.city.toString());
-      state.lastFetchedOffers = state.currentOffers;
-    })
-    .addCase(setOffers, (state: StateType, action: { payload: Offer[] }) => {
+    .addCase(setCurrentOffers, (state: StateType, action: { payload: Offer[] }) => {
       state.currentOffers = action.payload;
+    })
+    .addCase(setFetchedOffers, (state: StateType, action: { payload: Offer[] }) => {
+      state.lastFetchedOffers = action.payload;
     })
     .addCase(setOffersSortingType, (state: StateType, action: { payload: OffersSortingType}) => {
       state.offersSortingType = action.payload;
+    })
+    .addCase(setIsDoneFetchingOffers, (state: StateType, action: { payload: boolean }) => {
+      state.isDoneFetchingOffers = action.payload;
     });
 });
 

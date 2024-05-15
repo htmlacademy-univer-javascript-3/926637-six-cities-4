@@ -2,17 +2,24 @@ import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 import OffersList from '../../components/offers-list/offers-list';
 import { CityToOffer, OfferCardType } from '../../const';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Map from '../../components/map/map';
 import CitiesList from '../../components/cities-list/cities-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import OffersSortingForm from '../../components/offers-sorting-form/offers-sorting-form';
-
+import { fetchOffers } from '../../store/api-actions';
+import Loading from '../../components/loading/loading';
 
 function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
   const offers = useAppSelector((state) => state.currentOffers);
   const city = useAppSelector((state) => state.city);
+  const isDoneFetchingOffers = useAppSelector((state) => state.isDoneFetchingOffers);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [city]);
 
   return (
     <div className="page page--gray page--main">
@@ -53,11 +60,16 @@ function MainPage(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">
-                {offers.length} places to stay in {city.toString()}
-              </b>
-              <OffersSortingForm/>
-              <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
+              {
+                isDoneFetchingOffers ?
+                  <>
+                    <b className="places__found">
+                      {offers.length} places to stay in {city.toString()}
+                    </b>
+                    <OffersSortingForm/>
+                    <OffersList offers={offers} offerCardType={OfferCardType.Main} setActiveOffer={setActiveOffer}/>
+                  </> : <Loading/>
+              }
             </section>
             <div className="cities__right-section">
               <Map city={CityToOffer.Amsterdam} offers={offers} activeOffer={activeOffer} type="cities"/>

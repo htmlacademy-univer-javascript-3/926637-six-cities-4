@@ -15,7 +15,7 @@ type OfferPageProps = {
 
 function OfferPage({comments}: OfferPageProps): JSX.Element {
   const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
-  if (activeOffer !== null){
+  if (activeOffer !== null && activeOffer.id == "-1"){
     activeOffer.isFavorite = !!activeOffer.isFavorite; // Pass linter
   }
   return (

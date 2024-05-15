@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
+import { useAppDispatch } from '../../hooks';
+import { setFavoriteOffer } from '../../store/api-actions';
 
 type OfferCardProps = {
   offer: Offer;
@@ -43,6 +45,10 @@ function OfferCard({offer, offerCardType,
     default:
       break;
   }
+  const dispatch = useAppDispatch();
+  const handleBookmarkOnClick = () => {
+    dispatch(setFavoriteOffer({offerId: offer.id, isFavorite: !offer.isFavorite}));
+  };
   return (
     <article className={articleClassName} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
       {
@@ -69,7 +75,7 @@ function OfferCard({offer, offerCardType,
             <b className='place-card__price-value'>€{offer.price}</b>
             <span className='place-card__price-text'>/&nbsp;night</span>
           </div>
-          <button className={bookmarkButtonClassName} type='button'>
+          <button className={bookmarkButtonClassName} type='button' onClick={handleBookmarkOnClick}>
             <svg className='place-card__bookmark-icon' width={18} height={19}>
               <use xlinkHref='#icon-bookmark' />
             </svg>

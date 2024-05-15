@@ -20,7 +20,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.city = action.payload;
     })
     .addCase(getOffers, (state: StateType) => {
-      state.offers = offers;
+      state.offers = offers.filter((offer) => offer.city.name === state.city);
     });
 });
 

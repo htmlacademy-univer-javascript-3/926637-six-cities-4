@@ -9,4 +9,8 @@ export const setOffersSortingType = createAction<OffersSortingType>('setOffersSo
 
 export const fetchOffers = createAction('getOffers');
 
-export const setOffers = createAction<Offer[]>('setOffers');
+export const setCurrentOffers = createAction<Offer[]>('setCurrentOffers');
+
+export const setFetchedOffers = createAction<Offer[]>('setFetchedOffers');
+
+export const setIsDoneFetchingOffers = createAction<boolean>('setIsDoneFetchingOffers');

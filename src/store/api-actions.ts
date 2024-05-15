@@ -7,7 +7,6 @@ import { Offer, OfferDetailed } from '../types/offer.js';
 import { AuthData } from '../types/auth-data.js';
 import { UserData } from '../types/user-data.js';
 import { dropToken, saveToken } from '../services/token.js';
-import App from '../components/app/app.js';
 
 export const fetchOffers = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;

@@ -28,6 +28,13 @@ export enum CityToOffer {
   Dusseldorf = 'Dusseldorf'
 }
 
+export enum OffersSortingType {
+  PopularityDescending = 'Popular',
+  PriceDescending = 'Price: high to low',
+  PriceAscending = 'Price: low to high',
+  RatingDescending = 'Top rated first'
+}
+
 export const CityToCenterLocationMap: Record<CityToOffer, Location> = {
   [CityToOffer.Amsterdam]: {
     'latitude': 52.37403000,

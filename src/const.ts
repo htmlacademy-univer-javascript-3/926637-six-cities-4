@@ -14,7 +14,7 @@ export enum APIRoute {
 export enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unknown = 'Unknown'
+  Unknown = 'UNKNOWN'
 }
 
 export enum OfferCardType {

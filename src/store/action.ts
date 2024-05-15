@@ -1,5 +1,5 @@
 
-import {createAction} from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 import { CityToOffer } from '../const';
 
 export const setCityToOffer = createAction<CityToOffer>('setCityToOffer');

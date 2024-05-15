@@ -11,7 +11,7 @@ type StateType = {
 
 const initialState: StateType = {
   offers: offers,
-  city: CityToOffer.Amsterdam
+  city: CityToOffer.Paris
 };
 
 const reducer = createReducer(initialState, (builder) => {

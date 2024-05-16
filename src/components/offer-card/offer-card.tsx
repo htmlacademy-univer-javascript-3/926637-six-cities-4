@@ -18,7 +18,7 @@ function OfferCard({offer, offerCardType,
   let imgWidth: number = 0;
   let imgHeight: number = 0;
   let bookmarkButtonText: string = '';
-  const bookmarkButtonClassName = `place-card__bookmark-button${offer.isFavorite ? '--active' : ''} button`;
+  const bookmarkButtonClassName = `place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
   const offerUrl = `/offer/${offer.id}`;
   switch (offerCardType){
     case OfferCardType.Main:

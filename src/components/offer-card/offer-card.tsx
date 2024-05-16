@@ -3,6 +3,7 @@ import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
 import { useAppDispatch } from '../../hooks';
 import { setFavoriteOffer } from '../../store/api-actions';
+import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
 
 type OfferCardProps = {
   offer: Offer;

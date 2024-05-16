@@ -91,7 +91,7 @@ function OfferCard({offer, offerCardType,
         <h2 className='place-card__name'>
           <Link to={offerUrl}>{offer.title}</Link>
         </h2>
-        <p className='place-card__type'>{offer.type}</p>
+        <p className='place-card__type'>{capitalizeFirstLetter(offer.type)}</p>
       </div>
     </article>
   );

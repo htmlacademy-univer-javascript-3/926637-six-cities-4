@@ -41,7 +41,7 @@ export function Header({isActive = false}: HeaderProps): JSX.Element {
                       </Link>
                     </li>
                     <li className='header__nav-item'>
-                      <a className='header__nav-link' href='#' onClick={handleSignOutOnClick}>
+                      <a className='header__nav-link' onClick={handleSignOutOnClick}>
                         <span className='header__signout'>Sign out</span>
                       </a>
                     </li>

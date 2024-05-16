@@ -75,3 +75,7 @@ export const CityToCenterLocationMap: Record<CityToOffer, Location> = {
     'zoom': 12
   },
 };
+
+const MAX_OFFER_IMAGES_COUNT = 6;
+const MAX_REVIEWS_COUNT = 10;
+const MAX_NUMBER_OF_SUGGESIONS = 3;

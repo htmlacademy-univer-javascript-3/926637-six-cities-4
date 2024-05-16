@@ -1,4 +1,4 @@
-import { AuthStatus } from '../../const';
+import { AuthStatus, MAX_OFFER_IMAGES_COUNT } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { setFavoriteOffer } from '../../store/api-actions';
 import { OfferDetailed } from '../../types/offer';
@@ -27,7 +27,7 @@ export function OfferCardDetailed({currentOffer, authStatus, isDoneFetchingOffer
       <div className='offer__gallery-container container'>
         <div className='offer__gallery'>
           {
-            currentOffer.images.slice(0, 6).map((image) => (
+            currentOffer.images.slice(0, MAX_OFFER_IMAGES_COUNT).map((image) => (
               <div className='offer__image-wrapper' key={image}>
                 <img
                   className='offer__image'

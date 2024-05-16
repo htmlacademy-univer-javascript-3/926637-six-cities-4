@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Offer } from '../../types/offer';
 import { OffersSortingType } from '../../const';
 import { setCurrentOffers, setOffersSortingType } from '../../store/action';
 
@@ -10,7 +9,6 @@ export function OffersSortingForm(): JSX.Element {
   const city = useAppSelector((state) => state.city);
   const lastFetchedOffers = useAppSelector((state) => state.lastFetchedOffers);
   const offersSortingType = useAppSelector((state) => state.offersSortingType);
-  const dispatchSetOffers = (offers: Offer[]) => dispatch(setCurrentOffers(offers));
   const dispatchSetOfferSortingType = (offerSortingType: OffersSortingType) => dispatch(setOffersSortingType(offerSortingType));
   const toggleIsOpened = () => {
     setIsOpened(!isOpened);
@@ -34,8 +32,8 @@ export function OffersSortingForm(): JSX.Element {
       default:
         break;
     }
-    dispatchSetOffers(newOffers);
-  }, [offersSortingType, lastFetchedOffers]
+    dispatch(setCurrentOffers(newOffers));
+  }, [offersSortingType, lastFetchedOffers, dispatch]
   );
 
   useEffect(() => {

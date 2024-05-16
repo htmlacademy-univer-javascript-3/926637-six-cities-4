@@ -3,6 +3,7 @@ import { OfferCardType } from '../../const';
 import { Offer } from '../../types/offer';
 import { useAppDispatch } from '../../hooks';
 import { setFavoriteOffer } from '../../store/api-actions';
+import { capitalizeFirstLetter } from '../../utils/capitalize-first-letter';
 
 type OfferCardProps = {
   offer: Offer;
@@ -18,7 +19,7 @@ function OfferCard({offer, offerCardType,
   let imgWidth: number = 0;
   let imgHeight: number = 0;
   let bookmarkButtonText: string = '';
-  const bookmarkButtonClassName = `place-card__bookmark-button${offer.isFavorite ? '--active' : ''} button`;
+  const bookmarkButtonClassName = `place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
   const offerUrl = `/offer/${offer.id}`;
   switch (offerCardType){
     case OfferCardType.Main:
@@ -84,14 +85,14 @@ function OfferCard({offer, offerCardType,
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{ width: `${20 * offer.rating}%` }} />
+            <span style={{ width: `${20 * Math.round(offer.rating)}%` }} />
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>
         <h2 className='place-card__name'>
           <Link to={offerUrl}>{offer.title}</Link>
         </h2>
-        <p className='place-card__type'>{offer.type}</p>
+        <p className='place-card__type'>{capitalizeFirstLetter(offer.type)}</p>
       </div>
     </article>
   );

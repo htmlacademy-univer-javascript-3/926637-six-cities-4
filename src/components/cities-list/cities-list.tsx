@@ -7,11 +7,10 @@ import { fetchOffers } from '../../store/action';
 export function CitiesList(): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCity = useAppSelector((state) => state.city);
-  const getOffersOnSetCity = () => dispatch(fetchOffers());
 
   useEffect(() => {
-    getOffersOnSetCity();
-  }, [currentCity]);
+    dispatch(fetchOffers());
+  }, [currentCity, dispatch]);
 
   return (
     <div className="tabs">

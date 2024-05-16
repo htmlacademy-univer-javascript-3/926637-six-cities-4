@@ -11,7 +11,8 @@ export enum APIRoute {
   Offers = '/offers',
   Favorites = '/favorite',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comments = '/comments'
 }
 
 export enum AuthStatus {
@@ -74,3 +75,7 @@ export const CityToCenterLocationMap: Record<CityToOffer, Location> = {
     'zoom': 12
   },
 };
+
+export const MAX_OFFER_IMAGES_COUNT = 6;
+export const MAX_NEWEST_REVIEWS_COUNT = 10;
+export const MAX_NUMBER_OF_SUGGESIONS = 3;

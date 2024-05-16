@@ -1,29 +1,39 @@
 import OffersList from '../../components/offers-list/offers-list';
-import { OfferCardType } from '../../const';
-import { Offer } from '../../types/offer';
-import React from 'react';
+import { AppRoute, OfferCardType } from '../../const';
 import { Header } from '../../components/header/header';
 import { useAppSelector } from '../../hooks';
+import { Link } from 'react-router-dom';
 
 function FavoritesPage(): JSX.Element {
-  const [activeOffer, setActiveOffer] = React.useState<Offer | null>(null);
-  if (activeOffer !== null && activeOffer.id === '-1'){
-    activeOffer.isFavorite = !!activeOffer.isFavorite; // Pass linter
-  }
   const favoriteOffers = useAppSelector((state) => state.favoriteOffers);
+  const isNoFavoritesAvailable = useAppSelector((state) => state.isDoneFetchingFavoriteOffers && state.favoriteOffers.length === 0);
   return (
     <div className="page">
       <Header isActive={false}/>
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites ${isNoFavoritesAvailable ? 'page__main--favorites-empty' : ''}`}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <OffersList offers={favoriteOffers} offerCardType={OfferCardType.Favorite} setActiveOffer={setActiveOffer}/>
+          <section className={`${isNoFavoritesAvailable ? 'favorites favorites--empty' : 'favorites'}`}>
+            {
+              isNoFavoritesAvailable ?
+                <>
+                  <h1 className="visually-hidden">Favorites (empty)</h1>
+                  <div className="favorites__status-wrapper">
+                    <b className="favorites__status">Nothing yet saved.</b>
+                    <p className="favorites__status-description">
+                      Save properties to narrow down search or plan your future trips.
+                    </p>
+                  </div>
+                </> :
+                <>
+                  <h1 className="favorites__title">Saved listing</h1>
+                  <OffersList offers={favoriteOffers} offerCardType={OfferCardType.Favorite} setActiveOffer={() => {}}/>
+                </>
+            }
           </section>
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.Main}>
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -31,7 +41,7 @@ function FavoritesPage(): JSX.Element {
             width={64}
             height={33}
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

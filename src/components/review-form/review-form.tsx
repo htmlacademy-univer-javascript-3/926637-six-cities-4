@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { postComment } from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
+import { HttpStatusCode } from 'axios';
 
 export function ReviewForm() {
   const [formData, setFormData] = React.useState({
@@ -6,104 +10,90 @@ export function ReviewForm() {
     rating: '',
   });
 
+  const [isButtonEnabled, setIsButtonEnabled] = React.useState<boolean>(false);
+  const [isFormBeingSubmitted, setIsFormBeingSubmitted] = React.useState<boolean>(false);
+
 
   const handleFieldChange = (evt: { target: { name: string; value: string } }) => {
+    if (isFormBeingSubmitted) {
+      return;
+    }
     const {name, value} = evt.target;
-    // console.log(name, value);
     setFormData({...formData, [name]: value});
   };
 
+  useEffect(() => {
+    const reviewLength = formData.review.length;
+    const rating = parseInt(formData.rating, 10);
+    setIsButtonEnabled(!isFormBeingSubmitted && 1 <= rating && rating <= 5 && 50 <= reviewLength && reviewLength < 300);
+  }, [formData, isFormBeingSubmitted]);
+
+  const params = useParams();
+  const offerId = params.id;
+
+  const dispatch = useAppDispatch();
+
+  const [isErrorOccured, setIsErrorOccured] = useState<boolean>(false);
+  const [currentStarInput, setCurrentStarInput] = useState<HTMLInputElement | null>(null);
+
+  const handleFormOnSumbit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (offerId === undefined){
+      return;
+    }
+
+    setIsFormBeingSubmitted(true);
+    dispatch(postComment({offerId: offerId,
+      comment: formData.review,
+      rating: parseInt(formData.rating, 10)})).then((result) => {
+      const isError = result.payload !== HttpStatusCode.Created;
+      setIsErrorOccured(isError);
+      setIsFormBeingSubmitted(false);
+      if (isError){
+        return;
+      }
+      formData.rating = '';
+      formData.review = '';
+      if (currentStarInput !== null){
+        currentStarInput.checked = false;
+      }
+      return isError;
+    });
+  };
+
+  const starInputTitle = ['terribly', 'badly', 'not bad', 'good', 'perfect'];
+
   return (
-    <form className='reviews__form form' action='#' method='post'>
+    <form className='reviews__form form' action='' onSubmit={handleFormOnSumbit}>
       <label className='reviews__label form__label' htmlFor='review'>
         Your review
       </label>
       <div className='reviews__rating-form form__rating'>
-        <input
-          className='form__rating-input visually-hidden'
-          name='rating'
-          defaultValue={5}
-          id='5-stars'
-          type='radio'
-          onChange={handleFieldChange}
-        />
-        <label
-          htmlFor='5-stars'
-          className='reviews__rating-label form__rating-label'
-          title='perfect'
-        >
-          <svg className='form__star-image' width={37} height={33}>
-            <use xlinkHref='#icon-star' />
-          </svg>
-        </label>
-        <input
-          className='form__rating-input visually-hidden'
-          name='rating'
-          defaultValue={4}
-          id='4-stars'
-          type='radio'
-          onChange={handleFieldChange}
-        />
-        <label
-          htmlFor='4-stars'
-          className='reviews__rating-label form__rating-label'
-          title='good'
-        >
-          <svg className='form__star-image' width={37} height={33}>
-            <use xlinkHref='#icon-star' />
-          </svg>
-        </label>
-        <input
-          className='form__rating-input visually-hidden'
-          name='rating'
-          defaultValue={3}
-          id='3-stars'
-          type='radio'
-          onChange={handleFieldChange}
-        />
-        <label
-          htmlFor='3-stars'
-          className='reviews__rating-label form__rating-label'
-          title='not bad'
-        >
-          <svg className='form__star-image' width={37} height={33}>
-            <use xlinkHref='#icon-star' />
-          </svg>
-        </label>
-        <input
-          className='form__rating-input visually-hidden'
-          name='rating'
-          defaultValue={2}
-          id='2-stars'
-          type='radio'
-          onChange={handleFieldChange}
-        />
-        <label
-          htmlFor='2-stars'
-          className='reviews__rating-label form__rating-label'
-          title='badly'
-        >
-          <svg className='form__star-image' width={37} height={33}>
-            <use xlinkHref='#icon-star' />
-          </svg>
-        </label>
-        <input
-          className='form__rating-input visually-hidden'
-          name='rating'
-          defaultValue={1}
-          id='1-star'
-          type='radio'
-          onChange={handleFieldChange}
-        />
-        <label
-          htmlFor='1-star'
-          className='reviews__rating-label form__rating-label'
-          title='terribly'
-        >
-          <svg className='form__star-image' width={37} height={33}>
-            <use xlinkHref='#icon-star' />
-          </svg>
-        </label>
+        {
+          [...Array(5).keys()].map((x) => 5 - x).map((x) => (
+            <>
+              <input
+                className='form__rating-input visually-hidden'
+                name='rating'
+                defaultValue={x}
+                id={`${x}-stars`}
+                type='radio'
+                onChange={handleFieldChange}
+                onClick={(evt) => setCurrentStarInput(evt.currentTarget)}
+              />
+              <label
+                htmlFor={`${x}-stars`}
+                className='reviews__rating-label form__rating-label'
+                title={starInputTitle[x - 1]}
+              >
+                <svg className='form__star-image' width={37} height={33}>
+                  <use xlinkHref='#icon-star' />
+                </svg>
+              </label>
+            </>)
+          )
+        }
       </div>
       <textarea
         className='reviews__textarea form__textarea'
@@ -113,6 +103,12 @@ export function ReviewForm() {
         value={formData.review}
         onChange={handleFieldChange}
       />
+      {
+        isErrorOccured ?
+          <p className='reviews__help'>
+            <b style={{color: 'red'}}>Error occured while submitting review...</b>
+          </p> : ''
+      }
       <div className='reviews__button-wrapper'>
         <p className='reviews__help'>
           To submit review please make sure to set{' '}
@@ -122,8 +118,8 @@ export function ReviewForm() {
         </p>
         <button
           className='reviews__submit form__submit button'
+          disabled={!isButtonEnabled}
           type='submit'
-          disabled
         >
           Submit
         </button>

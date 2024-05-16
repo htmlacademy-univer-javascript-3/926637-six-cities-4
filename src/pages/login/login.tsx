@@ -1,13 +1,23 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import Logo from '../../components/logo/logo';
 import { loginAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { AppRoute, AuthStatus } from '../../const';
-import { redirectToRoute } from '../../store/action';
+import { AppRoute, AuthStatus, CityToOffer } from '../../const';
+import { redirectToRoute, setCityToOffer } from '../../store/action';
+import { Link } from 'react-router-dom';
+import { HttpStatusCode } from 'axios';
+
+function getRandomCityToOffer(): CityToOffer {
+  const citiesToOffer = Object.values(CityToOffer);
+  const randomIndex = Math.floor(Math.random() * citiesToOffer.length);
+  return citiesToOffer[randomIndex];
+}
 
 function LoginPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const [isErrorOccured, setIsErrorOccured] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -24,9 +34,15 @@ function LoginPage(): JSX.Element {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      })).then((result) => {
+        setIsErrorOccured(result.payload !== HttpStatusCode.Ok);
+      });
     }
   };
+
+  const randomCity = getRandomCityToOffer();
+
+  const handleAmsterdamOnClick = () => dispatch(setCityToOffer(randomCity));
 
   return (
     <div className="page page--gray page--login">
@@ -66,6 +82,9 @@ function LoginPage(): JSX.Element {
                   required
                 />
               </div>
+              {
+                isErrorOccured ? <label style={{color: 'red'}}>Error occured during authorization</label> : ''
+              }
               <button
                 className="login__submit form__submit button"
                 type="submit"
@@ -76,9 +95,9 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoute.Main} onClick={handleAmsterdamOnClick}>
+                <span>{randomCity.toString()}</span>
+              </Link>
             </div>
           </section>
         </div>

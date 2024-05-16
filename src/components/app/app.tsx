@@ -6,15 +6,10 @@ import FavoritesPage from '../../pages/favorites/favorites';
 import OfferPage from '../../pages/offer/offer';
 import NotFoundPage from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
-import {Comment} from '../../types/comment';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 
-type AppProps = {
-  comments: Comment[];
-};
-
-function App ({comments}: AppProps): JSX.Element {
+function App (): JSX.Element {
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -36,7 +31,7 @@ function App ({comments}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage comments={comments}/>}
+          element={<OfferPage/>}
         />
         <Route
           path="*"

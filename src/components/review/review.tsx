@@ -1,7 +1,7 @@
-import {Comment} from '../../types/comment';
+import {OfferComment} from '../../types/offer-comment';
 
 type ReviewProps = {
-  comment: Comment;
+  comment: OfferComment;
 };
 
 const months = ['January', 'February', 'March', 'April',
@@ -28,7 +28,7 @@ export function Review ({comment}: ReviewProps): JSX.Element {
       <div className='reviews__info'>
         <div className='reviews__rating rating'>
           <div className='reviews__stars rating__stars'>
-            <span style={{ width: `${20 * comment.rating}%` }} />
+            <span style={{ width: `${20 * Math.round(comment.rating)}%` }} />
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>

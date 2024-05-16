@@ -84,7 +84,7 @@ function OfferCard({offer, offerCardType,
         </div>
         <div className='place-card__rating rating'>
           <div className='place-card__stars rating__stars'>
-            <span style={{ width: `${20 * offer.rating}%` }} />
+            <span style={{ width: `${20 * Math.round(offer.rating)}%` }} />
             <span className='visually-hidden'>Rating</span>
           </div>
         </div>

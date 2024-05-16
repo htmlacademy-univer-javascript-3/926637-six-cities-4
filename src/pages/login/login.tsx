@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, AuthStatus, CityToOffer } from '../../const';
 import { redirectToRoute, setCityToOffer } from '../../store/action';
 import { Link } from 'react-router-dom';
+import { HttpStatusCode } from 'axios';
 
 function getRandomCityToOffer(): CityToOffer {
   const citiesToOffer = Object.values(CityToOffer);
@@ -34,7 +35,7 @@ function LoginPage(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value
       })).then((result) => {
-        setIsErrorOccured(result.payload !== 200);
+        setIsErrorOccured(result.payload !== HttpStatusCode.Ok);
       });
     }
   };

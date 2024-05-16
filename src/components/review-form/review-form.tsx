@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { postComment } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
+import { HttpStatusCode } from 'axios';
 
 export function ReviewForm() {
   const [formData, setFormData] = React.useState({
@@ -46,7 +47,7 @@ export function ReviewForm() {
     dispatch(postComment({offerId: offerId,
       comment: formData.review,
       rating: parseInt(formData.rating, 10)})).then((result) => {
-      const isError = result.payload !== 201;
+      const isError = result.payload !== HttpStatusCode.Created;
       setIsErrorOccured(isError);
       setIsFormBeingSubmitted(false);
       if (isError){

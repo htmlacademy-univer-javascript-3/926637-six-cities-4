@@ -77,5 +77,5 @@ export const CityToCenterLocationMap: Record<CityToOffer, Location> = {
 };
 
 const MAX_OFFER_IMAGES_COUNT = 6;
-const MAX_REVIEWS_COUNT = 10;
+const MAX_NEWEST_REVIEWS_COUNT = 10;
 const MAX_NUMBER_OF_SUGGESIONS = 3;

@@ -48,7 +48,7 @@ export function Header({isActive = false}: HeaderProps): JSX.Element {
                   </> :
                   <li className='header__nav-item'>
                     <Link className='header__nav-link header__nav-link--login' to={AppRoute.Login}>
-                      <span className='header__login'>Login</span>
+                      <span className='header__login'>Sign In</span>
                     </Link>
                   </li>
               }

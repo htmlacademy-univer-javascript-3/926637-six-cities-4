@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import { setIsDoneFetchingOffers, setCurrentOffers, setFetchedOffers, requireAuthorization, redirectToRoute, setFavoriteOffers, setUserData, setOfferComments, setIsDoneFetchingOfferComments, setIsDoneFetchingClosestOffers, setCurrentClosestOffers, setCurrentOffer, setIsDoneFetchingCurrentOffer, setIsDoneFetchingFavoriteOffers } from './action';
-import {APIRoute, AppRoute, AuthStatus} from '../const';
+import {APIRoute, AppRoute, AuthStatus, MAX_NUMBER_OF_SUGGESIONS} from '../const';
 import { Offer, OfferDetailed } from '../types/offer.js';
 import { AuthData } from '../types/auth-data.js';
 import { UserData } from '../types/user-data.js';
@@ -66,7 +66,7 @@ export const fetchClosestOffers = createAsyncThunk<void, string, {
     dispatch(setIsDoneFetchingClosestOffers(false));
     const url = `${APIRoute.Offers}/${_arg}/nearby`;
     const {data} = await api.get<Offer[]>(url);
-    dispatch(setCurrentClosestOffers(data.slice(0, 3)));
+    dispatch(setCurrentClosestOffers(data.slice(0, MAX_NUMBER_OF_SUGGESIONS)));
     dispatch(setIsDoneFetchingClosestOffers(true));
   },
 );
